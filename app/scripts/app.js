@@ -15,6 +15,8 @@
     $stateProvider
       .state('landing', {
         url: '/',
+        // instantiate controller
+        controller: 'LandingCtrl as landing',
         templateUrl: '/templates/landing.html',
       // });   remove ; to start chaining calls
 
@@ -27,6 +29,8 @@
       })
       .state('collection', {
         url: '/collection',
+        // register CollectionCtrl to collection state
+        controller: 'CollectionCtrl as collection',
         templateUrl: '/templates/collection.html'
       });
   }
