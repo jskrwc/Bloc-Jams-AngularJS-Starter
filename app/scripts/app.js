@@ -17,21 +17,22 @@
         url: '/',
         // instantiate controller
         controller: 'LandingCtrl as landing',
-        templateUrl: '/templates/landing.html',
+        templateUrl: '/templates/landing.html'
       // });   remove ; to start chaining calls
 
-        controller: 'LandingCtrl as landing'
+      })
 
-      })
-      .state('album', {
-        url: '/album',
-        templateUrl: '/templates/album.html'
-      })
       .state('collection', {
         url: '/collection',
         // register CollectionCtrl to collection state
         controller: 'CollectionCtrl as collection',
         templateUrl: '/templates/collection.html'
+      })
+
+      .state('album', {
+        url: '/album',
+        controller: 'AlbumCtrl as album',
+        templateUrl: '/templates/album.html'
       });
   }
 
