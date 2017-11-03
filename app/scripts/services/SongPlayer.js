@@ -27,8 +27,13 @@
          });
 
          currentSong = song;
- };
 
+         };
+         /**
+         * @function SongPlayer.play
+         * @desc Plays current Object (song) -- checks if diff song, sets to current and plays
+         * @param {Object} song
+         */
          SongPlayer.play = function(song) {
            if (currentSong !== song) {
               //  if (currentBuzzObject) {
@@ -44,20 +49,39 @@
 
                 // currentSong = song;
                 setSong(song);
-                currentBuzzObject.play();
-                song.playing = true;
+                // currentBuzzObject.play();
+                // song.playing = true;
+                this.playSong(song);  //use this bc used var setSong=....
 
                } else if (currentSong === song) {
                   if (currentBuzzObject.isPaused()) {
-                      currentBuzzObject.play();
+                      // currentBuzzObject.play();
+                      this.playSong(song);
                   }
                }
           };
 
-          SongPlayer.pause = function(song) {
-            currentBuzzObject.pause();
-            song.playing = false;
-          };
+        /**
+        * @function SongPlayer.pause
+        * @desc Pauses currently playing song (the currentBuzzObject)
+        * @param {Object} song
+        */
+        SongPlayer.pause = function(song) {
+          currentBuzzObject.pause();
+          song.playing = false;
+        };
+
+// Assigment 7: new playSong function
+        /**
+        @function SongPlayer.playSong
+        @desc Plays the currentBuzz object (song), and sets playing property of song to true
+        @param
+        */
+        SongPlayer.playSong = function(song) {
+            currentBuzzObject.play();
+            song.playing = true;
+      }
+
 
         return SongPlayer;
     }
