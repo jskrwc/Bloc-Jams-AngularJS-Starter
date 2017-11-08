@@ -55,6 +55,17 @@
              song.playing = true;
          };
 
+// Assignment 8: private stopSong function
+        /**
+        * @function stopSong
+        * @desc Stops the currentBuzzObject, and sets the playing property of the song object to null
+        * @param {Object} song
+        */
+        var stopSong = function(song) {
+            currentBuzzObject.stop();
+            song.playing = null;
+        };
+
        /**
        * @function getSongIndex
        * @desc gets index of a song
@@ -106,7 +117,7 @@
 
         /**
         * @function SongPlayer.previous
-        * @desc gets the current song's index and switches to previous song (or stops at first song if 1)
+        * @desc gets the current song's index and switches to previous song (or stops if at song 1)
         * @param {Object} song
         */
         SongPlayer.previous = function() {
@@ -114,8 +125,9 @@
           currentSongIndex--;
 
           if (currentSongIndex <0) {
-            currentBuzzObject.stop();
-            SongPlayer.currentSong.playing = null;
+            // currentBuzzObject.stop();
+            // SongPlayer.currentSong.playing = null;
+            stopSong(SongPlayer.currentSong);
           }
           else {
             var song = currentAlbum.songs[currentSongIndex];
@@ -123,6 +135,28 @@
             playSong(song);
           }
         };
+
+        /**
+        * @function SongPlayer.next
+        * @desc gets the current song's index and switches to next song in songs array (or stops if last song)
+        * @param {Object} song
+        */
+        SongPlayer.next = function() {
+          var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+          currentSongIndex++;
+
+          if (currentSongIndex == currentAlbum.songs.length) {
+            // currentBuzzObject.stop();
+            // SongPlayer.currentSong.playing = null;
+            stopSong(SongPlayer.currentSong);
+          }
+          else {
+            var song = currentAlbum.songs[currentSongIndex];
+            setSong(song);
+            playSong(song);
+          }
+        };
+
 
         return SongPlayer;
     }
