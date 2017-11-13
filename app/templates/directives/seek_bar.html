@@ -2,6 +2,5 @@
 <div class="seek-bar" ng-click="onClickSeekBar($event)">
     <div class="fill" ng-style="fillStyle()"></div>
     <!-- <div class="thumb" ng-stng-mousedown="trackThumb()"></div> -->
-<!-- 9.1A causes error, revert for now -->
-    <div class="thumb" ng-style="thumbStyle()" ng-mousedown="trackThumb()"></div>
+    <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
 </div>
