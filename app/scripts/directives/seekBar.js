@@ -2,9 +2,10 @@
     /**
     * @function seekBar
     * @desc handle seek bars (is a custom directive)
-    * @param
+    * @param {Object} $document
+    * @return {Number} offsetXpercent
     */
-    // function seekBar() {    inject $document as dependency to access window.document objet
+    // function seekBar() {    inject $document as dependency to access window.document object
     function seekBar($document) {
       var calculatePercent = function(seekBar, event) {
            var offsetX = event.pageX - seekBar.offset().left;
@@ -19,14 +20,33 @@
          templateUrl: '/templates/directives/seek_bar.html',
          replace: true,
          restrict: 'E',
-         scope: { },
+         scope: {
+            onChange: '&'
+         },
          link: function(scope, element, attributes) {
              // directive logic to return
             scope.value = 0;
             scope.max = 100;
 
+            /**
+            * @var seekBar
+            * @desc holds element for seek-bar directive
+            */
             var seekBar = $(element);
 
+            attributes.$observe('value', function(newValue) {
+                scope.value = newValue;
+            });
+
+            attributes.$observe('max', function(newValue) {
+                scope.max = newValue;
+            });
+
+            /**
+            * @function percentString
+            * @desc calcuates percent of value/max of seek bar
+            * @return {String} percent+"%"
+            */
             var percentString = function () {
                 var value = scope.value;
                 var max = scope.max;
@@ -34,14 +54,24 @@
                 return percent + "%";
             };
 
+            /**
+            * @function scope.fillStyle
+            * @desc returns width of seek bar by percent
+            * @return {Object} width:percentString()
+            */
             scope.fillStyle = function() {
-                console.log("fillstyle %: " + percentString());
+                // console.log("fillstyle %: " + percentString());
                 return {width: percentString()};
             };
 
             // 9.1A
-            scope.thumbstyle = function () {
-              console.log("thumbStyle %: " + percentString());
+            /**
+            * @function scope.thumbStyle
+            * @desc returns position of seek bar thumb
+            * @return {Object} left:percentString()
+            */
+            scope.thumbStyle = function () {
+              // console.log("thumbStyle %: " + percentString());
               return {left: percentString()};
 
             };
@@ -49,6 +79,7 @@
             scope.onClickSeekBar = function(event) {
                 var percent = calculatePercent(seekBar, event);
                 scope.value = percent * scope.max;
+                notifyOnChange(scope.value);
              };
 
              scope.trackThumb = function() {
@@ -56,6 +87,7 @@
                      var percent = calculatePercent(seekBar, event);
                      scope.$apply(function() {
                          scope.value = percent * scope.max;
+                         notifyOnChange(scope.value);
                      });
                  });
 
@@ -65,6 +97,12 @@
                  });
              };
 
+             // checkpoint 10 --passing updated value to onChange
+             var notifyOnChange = function(newValue) {
+                  if (typeof scope.onChange === 'function') {
+                      scope.onChange({value: newValue});
+                  }
+             };
          }
      };
     }

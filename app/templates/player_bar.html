@@ -20,12 +20,12 @@
               </a>
          </div>
 
-<!--expressions???? correct?  -->
+
        <div class="control-group currently-playing">
            <!-- <h2 class="song-name">title2: {{ playerBar.songPlayer.currentSong.playing }}</h2> this will show true or false...-->
-           <h2 class="song-name">title: {{ playerBar.songPlayer.currentSong.title }}</h2>
+           <h2 class="song-name">Song title: {{ playerBar.songPlayer.currentSong.title }}</h2>
            <h2 class="artist-song-mobile"></h2>
-           <h3 class="artist-name">artist: {{ playerBar.albumData.artist }}</h3>
+           <h3 class="artist-name">By artist: {{ playerBar.albumData.artist }}</h3>
            <div class="seek-control">
                <!-- <div class="seek-bar">
                    <div class="fill"></div>
@@ -42,7 +42,7 @@
                <div class="fill"></div>
                <div class="thumb"></div>
            </div> -->
-           <seek-bar></seek-bar>
+           <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration }}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>
        </div>
      </div>
  </section>

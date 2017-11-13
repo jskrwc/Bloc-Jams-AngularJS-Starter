@@ -5,7 +5,9 @@
     * @param {Object} song  Fixtures?
     */
     // function SongPlayer() {      inject the Fixtures service into SongPlayer service - store album info
-     function SongPlayer(Fixtures) {
+    // function SongPlayer(Fixtures) {
+    // inject $rootScope service as dependency
+    function SongPlayer($rootScope, Fixtures) {
          /**
          * @desc object that holds all info about song; also whether song is being played
          * @type {Object}
@@ -40,6 +42,13 @@
                formats: ['mp3'],
                preload: true
              });
+
+             //Checkpoint 10 -- add $rootScope,$apply event to apply time update
+             currentBuzzObject.bind('timeupdate', function() {
+                $rootScope.$apply(function() {
+                    SongPlayer.currentTime = currentBuzzObject.getTime();
+                });
+              });
 
              SongPlayer.currentSong = song;
          };
@@ -80,6 +89,11 @@
          @ @type {Object}
          */
          SongPlayer.currentSong = null;
+         /**
+         * @desc Current playback time (in seconds) of currently playing song
+         * @type {Number}
+         */
+         SongPlayer.currentTime = null;
 
 
          /**
@@ -158,11 +172,21 @@
         };
 
 
+        /**
+         * @function setCurrentTime
+         * @desc Set current time (in seconds) of currently playing song
+         * @param {Number} time
+         */
+         SongPlayer.setCurrentTime = function(time) {
+             if (currentBuzzObject) {
+                 currentBuzzObject.setTime(time);
+             }
+         };
+
         return SongPlayer;
     }
 
     angular
         .module('blocJams')
-        // .factory('SongPlayer', SongPlayer);
-        .factory('SongPlayer', ['Fixtures', SongPlayer]);
+        .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
 })();
