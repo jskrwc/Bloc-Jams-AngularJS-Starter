@@ -15,7 +15,8 @@
 
 .player-bar a,
 .player-bar a:hover {
-    color: white;
+    color: orange;
+    /*white;*/
     cursor: pointer;
     text-decoration: none;
 }
@@ -108,7 +109,7 @@
 }
 
 .seek-bar .fill {
-    background: white;
+    background: blue; /*white;*/
     width: 36%;
     height: 0.25rem;
     border-radius: 2px;
@@ -118,7 +119,7 @@
     position: absolute;
     height: 0.5rem;
     width: 0.5rem;
-    background: white;
+    background: red;  /*white*/
     left: 36%;
     margin-left: -0.25rem;
     top: 50%;
@@ -172,13 +173,13 @@
         margin: 0 auto;
         padding: 0;
         width: 100%;
-        text-align: center;   
+        text-align: center;
     }
-    
+
     .player-bar .main-controls {
         min-height: 3.5rem;
     }
-    
+
     .player-bar .currently-playing {
         min-height: 2.5rem;
     }
@@ -187,11 +188,11 @@
         min-height: 3.5rem;
     }
 
-    .artist-name, 
+    .artist-name,
     .song-name {
         display: none;
     }
-    
+
     .artist-song-mobile {
         display: block;
     }

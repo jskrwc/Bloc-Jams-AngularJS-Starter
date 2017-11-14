@@ -105,14 +105,10 @@
            song = song || SongPlayer.currentSong;
            if (SongPlayer.currentSong !== song) {
                 setSong(song);
-                // currentBuzzObject.play();
-                // song.playing = true;
                 playSong(song);
-
             }
             else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
-                    // currentBuzzObject.play();
                     playSong(song);
                 }
             }
