@@ -39,8 +39,8 @@
                 return {width: percentString()};
             };
 
-            // 9.1A
-            scope.thumbstyle = function () {
+            // 9.1A fixed
+            scope.thumbStyle = function () {
               console.log("thumbStyle %: " + percentString());
               return {left: percentString()};
 
