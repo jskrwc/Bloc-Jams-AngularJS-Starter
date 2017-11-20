@@ -47,6 +47,14 @@
              currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                     SongPlayer.currentTime = currentBuzzObject.getTime();
+
+                    //  //Extra Credit - play next song when current one ends
+                                  if (SongPlayer.currentTime >= SongPlayer.currentSong.duration) {
+                                    console.log("time: "+ SongPlayer.currentTime +"duration: "+ SongPlayer.currentSong.duration)
+                                    SongPlayer.next();
+                                  }
+                    // // End extra credit
+
 //Assigment 10
                     SongPlayer.volume = currentBuzzObject.getVolume();
                 });
@@ -185,7 +193,9 @@
              if (currentBuzzObject) {
                  currentBuzzObject.setTime(time);
              }
+
          };
+
 
 //Assignment 10
         /**
